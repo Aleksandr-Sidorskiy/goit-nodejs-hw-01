@@ -19,16 +19,24 @@ async function getContactById(contactId) {
   const contacts = await listContacts();
   const currentContact = contacts.find((contact) => contact.id === contactId);
 
-  if (!currentContact) {
-    return null;
-  }
+  return currentContact || null;
+  
 }
 function removeContact(contactId) {
-  console.log('removeContact')
+  
 }
 
-function addContact(name, email, phone) {
-  console.log('addContact')
+async function addContact({ name, email, phone }) {
+  const contacts = await listContacts();
+  const newContact = {
+    id: nanoid(),
+    name,
+    email,
+    phone
+  };
+  contacts.push(newContact);
+  await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+  return newContact;
 }
 
 module.exports = {
