@@ -3,11 +3,8 @@ const { error } = require('console');
 const path = require('node:path');
 const { nanoid } = require("nanoid");
 
-    
-//   Раскомментируй и запиши значение
  const contactsPath = path.join(__dirname, "db/contacts.json");
  
- // TODO: задокументировать каждую функцию
  async function listContacts() {
     const data = await fs.readFile(contactsPath);
     const contacts = JSON.parse(data);
